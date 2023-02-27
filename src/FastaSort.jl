@@ -16,8 +16,9 @@ function fasta_sort_file(infile, outfile)
     @time records = collect(FASTAReader(open(infile)))
     @info "Spilt"
     @time splitted = map(split_record, records)
-    @info "Sort"
+    @info "Build Heap"
     @time h = BinaryMinHeap(splitted)
+    @info "Sort"
     @time sorted = extract_all!(h)
     @info "Write output: $(length(sorted)) records."
     @time open(outfile,"w") do writer
